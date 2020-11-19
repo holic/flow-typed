@@ -255,14 +255,14 @@ declare module '@apollo/react-hooks' {
   |};
 
   /* Mutation types */
-  declare export type RefetchQueriesFunction = (
-    ...args: any[]
+  declare export type RefetchQueriesFunction<TData> = (
+    MutationFetchResult<TData>
   ) => Array<string | PureQueryOptions>;
 
   declare export type BaseMutationOptions<TData, TVariables> = {|
     variables?: TVariables,
     optimisticResponse?: TData | ((vars: TVariables) => TData),
-    refetchQueries?: Array<string | PureQueryOptions> | RefetchQueriesFunction,
+    refetchQueries?: Array<string | PureQueryOptions> | RefetchQueriesFunction<TData>,
     awaitRefetchQueries?: boolean,
     errorPolicy?: ErrorPolicy,
     update?: MutationUpdaterFn<TData>,
@@ -278,7 +278,7 @@ declare module '@apollo/react-hooks' {
   declare export type MutationFunctionOptions<TData, TVariables> = {|
     variables?: TVariables,
     optimisticResponse?: TData | ((vars: TVariables | {||}) => TData),
-    refetchQueries?: Array<string | PureQueryOptions> | RefetchQueriesFunction,
+    refetchQueries?: Array<string | PureQueryOptions> | RefetchQueriesFunction<TData>,
     awaitRefetchQueries?: boolean,
     update?: MutationUpdaterFn<TData>,
     context?: Context,
